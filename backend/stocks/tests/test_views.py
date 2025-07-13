@@ -84,3 +84,12 @@ class TickerDailyDataViewSetTest(BaseTestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
         self.assertEqual(float(response.data[0]['close']), 152.0)
+
+    def test_fetch_daily_data(self):
+        url = reverse('tickerdailydata-fetch-daily-data')
+        response = self.client.post(url, {}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('status', response.data)
+        self.assertEqual(response.data['status'], 'success')
+        self.assertIn('fetched', response.data)
+        self.assertTrue(response.data['fetched'] >= 1)

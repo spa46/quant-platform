@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/accounts/', include('accounts.urls')),
     path('api/stocks/', include('stocks.urls')),  # Stocks app endpoints
+    # path('api-token-auth/', obtain_auth_token, name='api_token_auth'),  # Removed to avoid duplication
     path('api-token-auth/', include('rest_framework.urls')),
 ]
