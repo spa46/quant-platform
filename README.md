@@ -1,11 +1,10 @@
-# Project Title
+# Quant Platform
 
-![CI](https://github.com/<user>/<repo>/actions/workflows/ci.yml/badge.svg?branch=prototype)
-[![codecov](https://codecov.io/gh/<user>/<repo>/branch/prototype/graph/badge.svg)](https://codecov.io/gh/<user>/<repo>)
-![Python](https://img.shields.io/badge/python-3.11-blue)
+![CI](https://github.com/spa46/quant-platform/actions/workflows/ci.yml/badge.svg?branch=prototype)
+[![codecov](https://codecov.io/gh/spa46/quant-platform/branch/prototype/graph/badge.svg)](https://codecov.io/gh/spa46/quant-platform)
+![Python](https://img.shields.io/badge/python-3.13-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Docker Build](https://img.shields.io/docker/build/<user>/<image>)
-[![Code Climate](https://img.shields.io/codeclimate/maintainability/<user>/<repo>)](https://codeclimate.com/github/<user>/<repo>)
+```
 
 ---
 
