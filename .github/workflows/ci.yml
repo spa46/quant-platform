@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [ prototype ]
+  pull_request:
+    branches: [ prototype ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      redis:
+        image: redis:6.2
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install docker-compose -y
+
+      - name: Build and start services
+        run: |
+          docker-compose up -d --build redis
+          docker-compose build backend
+          docker-compose up -d backend celery_worker celery_beat
+
+      - name: Wait for services to be healthy
+        run: |
+          sleep 20
+          docker-compose ps
+
+      - name: Run backend tests
+        run: |
+          docker-compose exec -T backend python manage.py test stocks
+
+      - name: Run health checks
+        run: |
+          docker-compose exec -T backend python scripts/check_redis.py
+          docker-compose exec -T backend python scripts/check_celery_worker.py
+          docker-compose exec -T backend python scripts/check_celery_beat.py
+
+      - name: Shut down services
+        if: always()
+        run: docker-compose down -v 
