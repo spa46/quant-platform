@@ -1,6 +1,7 @@
 from datetime import date
 from decimal import Decimal
 from stocks.models import Ticker, TickerDailyData
+from celery import shared_task
 
 def fetch_and_store_daily_data(ticker_symbols=None):
     """
@@ -34,4 +35,8 @@ def fetch_and_store_daily_data(ticker_symbols=None):
             defaults=data
         )
         results.append((ticker.symbol, created))
-    return results 
+    return results
+
+@shared_task
+def fetch_and_store_daily_data_task(ticker_symbols=None):
+    return fetch_and_store_daily_data(ticker_symbols) 
