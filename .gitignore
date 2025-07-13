@@ -1,1 +1,7 @@
 .idea/
+
+backend/quant/settings/production*
+
+celerybeat-schedule
+dump.rdb
+

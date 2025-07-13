@@ -16,6 +16,9 @@ jobs:
         ports:
           - 6379:6379
 
+    env:
+      DJANGO_ENV: development
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
